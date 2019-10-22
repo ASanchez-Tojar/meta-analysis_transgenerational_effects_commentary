@@ -10,12 +10,12 @@ More information and materials available at the [OSF project](https://osf.io/srj
 
 ## Folders:
 
-`code`: 
+[`code`](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/tree/master/code): 
 
-`data`:
+[`data`](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/tree/master/data):
 
-`figures`:
+[`figures`](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/tree/master/figures):
 
-`models`:
+[`models`](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/tree/master/models):
 
 ### Notes:
