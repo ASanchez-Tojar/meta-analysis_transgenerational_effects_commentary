@@ -147,7 +147,7 @@ trans$study <- ifelse(trans$study=="Amzallac",
                       trans$study)
 ```
 
-By exploring the database, we found that `r table(trans$duplicated.row)[2]` rows were duplicated, which we confirmed by reading the original references (n = `r length(unique(trans[trans$duplicated.row==TRUE,"study"]))` studies). We already found some inconsistencies with assigning trait categories (see code comments below).
+By exploring the database, we found that `r table(trans$duplicated.row)[2]` rows were duplicated, which we confirmed by reading the original references (n = `r length(unique(trans[trans$duplicated.row==TRUE,"study"]))` studies). We already found some inconsistencies with assigning trait categories (see code comments above).
 
 ### 2.5 - Traits analysed
 
@@ -180,7 +180,7 @@ trait.details.to.exclude <- c("body size (residuals of standard length)30",
 trans %>% group_by(trait.detail) %>% summarise(count = n_distinct(trait)) %>% filter(count>1)
 ```
 
-We explored the data set to understand what type of outcome variables were included in the original analyses. For that, we visually explored the definitions provided in the variable `trait.detail`, which had `r length(unique(trans$trait.detail))` levels. Based on this exploration, we identified `r length(unique(trait.details.to.exclude))` variability-related traits (k = `r nrow(trans[trans$trait.detail %in% trait.details.to.exclude,])` effect sizes) such as coefficient of variations and regressions residuals. Despite meta-analyzing variances is certainly possible, it requires different methodologies [see @nakagawa2015;@sanchez-tojar2019], and thus, these traits should be excluded from the current meta-analysis. 
+We explored the data set to understand what type of outcome variables were included in the original analyses. For that, we visually explored the definitions provided in the variable `trait.detail`, which had `r length(unique(trans$trait.detail))` levels. Based on this exploration, we identified `r length(unique(trait.details.to.exclude))` variability-related traits (k = `r nrow(trans[trans$trait.detail %in% trait.details.to.exclude,])` effect sizes) such as coefficient of variations and regressions residuals. Despite meta-analyzing variances certainly being possible, it requires different methodologies [see @nakagawa2015;@sanchez-tojar2019], and thus, these traits should be excluded from the current meta-analysis. 
 
 ### 2.6 - Environmental factors
 
@@ -250,7 +250,7 @@ names(environmental.factor.exploration) <- c("env.detail.test","is.natural")
 environmental.factor.exploration.counts <- environmental.factor.exploration %>% group_by(env.detail.test) %>% summarise(count = n_distinct(is.natural)) %>% filter(count>1)
 
 ```
-In addition, we explored the classification of environmental factors and found `r nrow(environmental.factor.exploration.counts)` factors that were classified as both "Naturally-occurring fluctuations" and "Human-mediated changes": (i) Cadmium, (ii) Cu, (iii) low PH, (iv) ocean acidification, and (v) toxic Microcystis.
+In addition, we explored the classification of environmental factors and found `r nrow(environmental.factor.exploration.counts)` factors that were classified as both "Naturally-occurring fluctuations" and "Human-mediated changes": (i) Cadmium, (ii) Cu, (iii) low PH, (iv) ocean acidification, and (v) toxic *Microcystis*.
 
 ### 2.7 - Expected fitness relationships
 
