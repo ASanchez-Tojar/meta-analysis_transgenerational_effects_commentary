@@ -147,7 +147,7 @@ trans$study <- ifelse(trans$study=="Amzallac",
                       trans$study)
 ```
 
-By exploring the database, we found that `r table(trans$duplicated.row)[2]` rows were duplicated, which we confirmed by reading the original references (n = `r length(unique(trans[trans$duplicated.row==TRUE,"study"]))` studies). We already found some inconsistencies with assigning trait categories (see code comments above).
+By exploring the database, we found that `r table(trans$duplicated.row)[2]` rows were duplicated, which we confirmed by reading the original references (n = `r length(unique(trans[trans$duplicated.row==TRUE,"study"]))` studies). We already found some inconsistencies with assigning trait categories (see code comments below).
 
 ### 2.5 - Traits analysed
 
