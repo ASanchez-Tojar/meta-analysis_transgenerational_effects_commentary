@@ -1,7 +1,7 @@
 ---
 title: The jury is still out regarding the generality of adaptive \"transgenerational\" effects
 author: Alfredo Sanchez-Tojar, Malgorzata Lagisz, Nicholas P. Moran, Shinichi Nakagawa, Daniel W.A. Noble, Klaus Reinhold
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+date: 'Last updated: `r format(Sys.time(), "%d %B, %Y")`'
 output:
   html_document:
     code_download: yes
@@ -3966,6 +3966,8 @@ reciprocal.mr %>%
 **Figure S16**. Results showing that fully factorial designs lead to smaller effect sizes than non-fully factorial designs. The figure shows the results of the phylogenetic meta-regression including `experimental type` (fully vs. non-fully reciprocal design) as the only moderator, but results were very similar for all the models (see above). Points represent means, and error bars show 95% confidence intervals. Numbers represent effect sizes.
 
 ## R Session Information
+
+R session information detailing the versions and packages used in this project for reproducibility purposes.
 
 ```{r}
 sessionInfo() %>% pander()
