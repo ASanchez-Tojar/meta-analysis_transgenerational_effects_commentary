@@ -1,4 +1,4 @@
-https://zenodo.org/badge/DOI/10.5281/zenodo.3549539.svg
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3549539.svg)](https://doi.org/10.5281/zenodo.3549539)
 
 # Meta-analysis of adaptive "transgenerational" effects: a commentary on [Yin et al. (2019)](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.13373), Ecology Letters.
 
