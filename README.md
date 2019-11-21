@@ -21,3 +21,5 @@ More information and materials available at the [OSF project](https://osf.io/srj
 [`models`](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/tree/master/models): contains sets of models run as part of this project. For more information, see the [supplementary information](https://asanchez-tojar.github.io/meta-analysis_transgenerational_effects_commentary/supplementary_information.html).
 
 ### Notes:
+
+See details of the licence of this repository in [LICENSE.txt](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/blob/master/LICENSE.txt)
