@@ -1,3 +1,5 @@
+https://zenodo.org/badge/DOI/10.5281/zenodo.3549539.svg
+
 # Meta-analysis of adaptive "transgenerational" effects: a commentary on [Yin et al. (2019)](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.13373), Ecology Letters.
 
 This project contains the materials for a project testing the generality and robustness of adaptive "transgenerational" effects across species, environments... It re-analyzes a published meta-analytic data set to show that adaptive "transgenerational" effects - more specifically, anticipatory parental effects, despite existing in some species, are not as widespread as generally stated.
