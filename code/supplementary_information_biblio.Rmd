@@ -180,7 +180,7 @@ trait.details.to.exclude <- c("body size (residuals of standard length)30",
 trans %>% group_by(trait.detail) %>% summarise(count = n_distinct(trait)) %>% filter(count>1)
 ```
 
-We explored the data set to understand what type of outcome variables were included in the original analyses. For that, we visually explored the definitions provided in the variable `trait.detail`, which had `r length(unique(trans$trait.detail))` levels. Based on this exploration, we identified `r length(unique(trait.details.to.exclude))` variability-related traits (k = `r nrow(trans[trans$trait.detail %in% trait.details.to.exclude,])` effect sizes) such as coefficient of variations and regressions residuals. Despite meta-analyzing variances certainly being possible, it requires different methodologies [see @nakagawa2015;@sanchez-tojar2019], and thus, these traits should have been excluded from the original meta-analysis and meta-regressions. 
+We explored the data set to understand what type of outcome variables were included in the original analyses. For that, we visually explored the definitions provided in the variable `trait.detail`, which had `r length(unique(trans$trait.detail))` levels. Based on this exploration, we identified `r length(unique(trait.details.to.exclude))` variability-related traits (k = `r nrow(trans[trans$trait.detail %in% trait.details.to.exclude,])` effect sizes) such as coefficient of variations and residuals of regressions. Despite meta-analyzing variances certainly being possible, it requires different methodologies [see @nakagawa2015;@sanchez-tojar2019], and thus, these traits should have been excluded from the original meta-analysis and meta-regressions. 
 
 ### 2.6 - Environmental factors
 
