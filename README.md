@@ -25,3 +25,5 @@ More information and materials available at the [OSF project](https://osf.io/srj
 ### Notes:
 
 See details of the licence of this repository in [LICENSE.txt](https://github.com/ASanchez-Tojar/meta-analysis_transgenerational_effects_commentary/blob/master/LICENSE.txt)
+
+21 Jan 2020: a few minor edits have been added to section 3.1 of `supplementary_information.biblio.rmd`. These minor edits consist of commenting some lines of code to make reproducibility of results faster and easier. However, since these minor edits do not modify anything substantially, we have decided not to update this in Zenodo. Apologies for any inconveniences.
