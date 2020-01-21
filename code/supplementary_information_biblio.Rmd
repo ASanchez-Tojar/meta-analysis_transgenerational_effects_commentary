@@ -411,62 +411,63 @@ After correcting all the inconsistencies we found in the previous sections, the 
 Using the corrected species information (see section 2.8), we built a phylogeny by retrieving the phylogenetic relationships from the Open Tree of Life [@hinchliff2015] using the R package `rotl` v.3.0.5 [@michonneau2016]. We estimated branch lengths following Grafen [-@grafen1989] as implemented in the function `compute.brlen()` of the R package `ape` v.5.2  [@paradis2019]. We dealt with polytomies using randomization as implemented in the function `multi2di()` from the R package `ape` v.5.2 [@paradis2019]. We then constructed a phylogenetic relatedness correlation matrix for the statistical models (see below).
 
 ```{r, results="hide"}
-# # re-obtaining dataframe listing the Open Tree identifiers potentially matching our list of species (be aware that this will take a few minutes, and you can load the data below)
+# # re-obtaining dataframe listing the Open Tree identifiers potentially matching our list of species (be aware that this will take a few minutes, and you can simply load the tree and relationship matrix that we used below). The following code obtains the taxonomic data (which was obtained on the 14th of October 2019 for our study), does some checking of such data, retrieves the phylogenetic relationships, creates a relationship matrix, and makes sure than the dataset and the matrix have the same nomenclature. To speed up the process, the code is commented, and both the phylogenetic tree and its relationship matrix can be directly loaded below. Note that the Open Tree Taxonomy and Open Tree of Live are ongoing projects, and there might be some differences between our tree and relationship matrix, and trees and matrices built in a different point in time. However, we provide our tree and relationship matrices to make our process reproducible.
+# 
 # taxa.corrected <- tnrs_match_names(names = unique(trans.final$species.2))
 # 
-# # saving the final, corrected taxonomic data created on the 14th of October to speed the process in the future
+# # saving the final, corrected taxonomic data created on the 14th of October 2019.
 # save(taxa.corrected,file = "../data/taxa_Open_Tree_of_Life_corrected.RData")
-
-# loading the taxonomic data created on the 14th of October
-load("../data/taxa_Open_Tree_of_Life_corrected.RData") #taxa.corrected
-
-# check approximate matches
-taxa.corrected[taxa.corrected$approximate_match==TRUE,]
-
-# check synonyms matches
-taxa.corrected[taxa.corrected$is_synonym==TRUE,]
-
-# check number of matches
-taxa.corrected[taxa.corrected$number_matches>1,]
-
-# some further checks
-ott_id_tocheck <- taxa.corrected[taxa.corrected$number_matches != 1,"ott_id"]
-
-for(i in 1:length(ott_id_tocheck)){
-  print(inspect(taxa.corrected, ott_id = ott_id_tocheck[i]))
-}
-
-taxa.corrected[order(taxa.corrected$search_string),]
-
-# everything seems in order now, only "ludwigia hexapetala" could be change from "ludwigia uruguayensis" to "ludwigia grandiflora subsp. hexapetala", but that would not make any differences.
-
-# retrieving phylogenetic relationships among taxa in the form of a trimmed sub-tree
-tree <- tol_induced_subtree(ott_ids = taxa.corrected[["ott_id"]], label_format = "name")
-
-# we need to check for the existence of polytomies
-is.binary.tree(tree) # there are some polytomies
-
-# to take care of these polytomies, we are goint to use a randomization approach
-set.seed(23) #making it replicable, at least for this version of R (i.e. v.3.5.1)
-tree_random <- multi2di(tree,random=TRUE)
-is.binary.tree(tree_random)
-
-# to confirm that our tree covers all the species we wanted it to include, and make sure that the species names in our database match those in the tree, we use the following code
-
-tree_random$tip.label <- gsub("_"," ", tree_random$tip.label)
-intersect(as.character(tree_random$tip.label), as.character(trans.final$species.2))
-setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
-setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
-
-# they are the same species, the "problem" is that synonyms have been used in the tree. We are going to leave all the names as in Open Tree of Life as it seems to be the most updated nomenclature
-
-# we start by fixing the following names in the tree
-tree_random$tip.label[tree_random$tip.label=="Gadus morhua (species in domain Eukaryota)"]<-"Gadus morhua"
-#tree_random$tip.label[tree_random$tip.label=="Ludwigia grandiflora subsp. hexapetala"]<-"Ludwigia hexapetala"
-tree_random$tip.label[tree_random$tip.label=="mrcaott147479ott199966"]<-"Cyprinodon variegatus"
-
-setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
-setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
+# 
+# # loading the taxonomic data created on the 14th of October 2019
+# load("../data/taxa_Open_Tree_of_Life_corrected.RData") #taxa.corrected
+# 
+# # check approximate matches
+# taxa.corrected[taxa.corrected$approximate_match==TRUE,]
+# 
+# # check synonyms matches
+# taxa.corrected[taxa.corrected$is_synonym==TRUE,]
+# 
+# # check number of matches
+# taxa.corrected[taxa.corrected$number_matches>1,]
+# 
+# # some further checks
+# ott_id_tocheck <- taxa.corrected[taxa.corrected$number_matches != 1,"ott_id"]
+# 
+# for(i in 1:length(ott_id_tocheck)){
+#   print(inspect(taxa.corrected, ott_id = ott_id_tocheck[i]))
+# }
+# 
+# taxa.corrected[order(taxa.corrected$search_string),]
+# 
+# # everything seems in order now, only "ludwigia hexapetala" could be change from "ludwigia uruguayensis" to "ludwigia grandiflora subsp. hexapetala", but that would not make any differences.
+# 
+# # retrieving phylogenetic relationships among taxa in the form of a trimmed sub-tree
+# tree <- tol_induced_subtree(ott_ids = taxa.corrected[["ott_id"]], label_format = "name")
+# 
+# # we need to check for the existence of polytomies
+# is.binary.tree(tree) # there are some polytomies
+# 
+# # to take care of these polytomies, we are goint to use a randomization approach
+# set.seed(23) #making it replicable, at least for this version of R (i.e. v.3.5.1)
+# tree_random <- multi2di(tree,random=TRUE)
+# is.binary.tree(tree_random)
+# 
+# # to confirm that our tree covers all the species we wanted it to include, and make sure that the species names in our database match those in the tree, we use the following code
+# 
+# tree_random$tip.label <- gsub("_"," ", tree_random$tip.label)
+# intersect(as.character(tree_random$tip.label), as.character(trans.final$species.2))
+# setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
+# setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
+# 
+# # they are the same species, the "problem" is that synonyms have been used in the tree. We are going to leave all the names as in Open Tree of Life as it seems to be the most updated nomenclature
+# 
+# # we start by fixing the following names in the tree
+# tree_random$tip.label[tree_random$tip.label=="Gadus morhua (species in domain Eukaryota)"]<-"Gadus morhua"
+# #tree_random$tip.label[tree_random$tip.label=="Ludwigia grandiflora subsp. hexapetala"]<-"Ludwigia hexapetala"
+# tree_random$tip.label[tree_random$tip.label=="mrcaott147479ott199966"]<-"Cyprinodon variegatus"
+# 
+# setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
+# setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
 
 # changing the names in our database to follow those in the tree. 
 trans.final <- trans.final %>% mutate(species.2 = recode(species.2,
@@ -484,8 +485,8 @@ trans.final <- trans.final %>% mutate(species.2 = recode(species.2,
                                                          `Campanulastrum americanum` = "Campanula americana",
                                                          `Niveoscincus ocellatus` = "Carinascincus ocellatus"))
 
-setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
-setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
+# setdiff(as.character(trans.final$species.2), as.character(tree_random$tip.label)) #listed in our database but not in the tree
+# setdiff(as.character(tree_random$tip.label),as.character(trans.final$species.2)) # listed in the tree but not in our database
 
 # changing the names for the variable species too 
 trans.final <- trans.final %>% mutate(species = recode(species,
@@ -503,25 +504,32 @@ trans.final <- trans.final %>% mutate(species = recode(species,
                                                        `Campanulastrum_americanum` = "Campanula_americana",
                                                        `Niveoscincus_ocellatus` = "Carinascincus_ocellatus"))
 
-# we can now save the tree
-save(tree_random, file = "../data/tree_random.Rdata")
+# # we can now save the tree
+# save(tree_random, file = "../data/tree_random.Rdata")
 
-# compute branch lengths of tree
-phylo_branch <- compute.brlen(tree_random, method = "Grafen", power = 1)
+# we can now load the saved tree
+load("../data/tree_random.Rdata") #tree_random
 
-# check tree is ultrametric
-is.ultrametric(phylo_branch) # TRUE
+# # compute branch lengths of tree
+# phylo_branch <- compute.brlen(tree_random, method = "Grafen", power = 1)
+# 
+# # check tree is ultrametric
+# is.ultrametric(phylo_branch) # TRUE
+# 
+# # matrix to be included in the models
+# phylo_cor <- vcv(phylo_branch, cor = T)
+# 
+# # finally, save matrix for future analyses
+# save(phylo_cor, file = "../data/phylo_cor.Rdata")
 
-# matrix to be included in the models
-phylo_cor <- vcv(phylo_branch, cor = T)
+# we can now load the saved matrix
+load("../data/phylo_cor.Rdata") #phylo_cor
 
-# finally, save matrix for future analyses
-save(phylo_cor, file = "../data/phylo_cor.Rdata")
 ```
 
 ```{r fig.height = 18, fig.width = 10, fig.align = "center"}
-# we can then plot the tree, but notice that the species names shown in the tree are not exactly the same as the species names that we had in our list. This is because those names had synonyms in the tree of life database, and we are using those names for the plot
-plot(tree, cex=1, label.offset =.1, no.margin = TRUE)
+# we can then plot the tree, but notice that the species names shown in the tree are not exactly the same as the species names that we had in our list. This is because those names had synonyms in the tree of life database, and we are using those names for the plot. This tree uses the data once polytomies have been dealt with.
+plot(tree_random, cex=1, label.offset =.1, no.margin = TRUE)
 ```
 
 **Figure S2**. Phylogenetic tree of all species from the full database. Notice that some of the names shown in the tree correspond to the most updated synonyms according to the Open Tree Taxonomy [@rees2017] of those originally available in the database.
