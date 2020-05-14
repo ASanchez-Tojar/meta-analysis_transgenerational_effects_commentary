@@ -6,7 +6,7 @@ This project contains the materials for a project testing the generality and rob
 
 This repository contains the data and Rmarkdown code used in the following study:
 
-Alfredo Sánchez-Tójar, Malgorzata Lagisz, Nicholas P. Moran, Shinichi Nakagawa, Daniel W. A. Noble, Klaus Reinhold. *In preparation*. The jury is still out regarding the generality of adaptive “transgenerational” effects.
+Alfredo Sánchez-Tójar, Malgorzata Lagisz, Nicholas P. Moran, Shinichi Nakagawa, Daniel W. A. Noble, Klaus Reinhold. *In press*. The jury is still out regarding the generality of adaptive “transgenerational” effects.
 
 More information and materials available at the [OSF project](https://osf.io/srjgp/). For any further information, please contact: [Alfredo Sánchez-Tójar](https://scholar.google.co.uk/citations?hl=en&user=Sh-Rjq8AAAAJ&view_op=list_works&sortby=pubdate), email: alfredo.tojar@gmail.com
 
