@@ -8,7 +8,7 @@ This repository contains the data and Rmarkdown code used in the following study
 
 ---
 
-Alfredo Sánchez-Tójar, Malgorzata Lagisz, Nicholas P. Moran, Shinichi Nakagawa, Daniel W. A. Noble, Klaus Reinhold. 2020. The jury is still out regarding the generality of adaptive “transgenerational” effects. Ecology Letters, 23(11):1715-1718. DOI: [10.1111/ele.13479](https://doi.org/10.1111/ele.13479)
+Alfredo Sánchez-Tójar, Malgorzata Lagisz, Nicholas P. Moran, Shinichi Nakagawa, Daniel W. A. Noble, Klaus Reinhold. 2020. *The jury is still out regarding the generality of adaptive “transgenerational” effects*. Ecology Letters, 23(11):1715-1718. DOI: [10.1111/ele.13479](https://doi.org/10.1111/ele.13479)
 
 ---
 
